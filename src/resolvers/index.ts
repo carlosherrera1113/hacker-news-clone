@@ -1,16 +1,19 @@
 
 import Query from './query';
 
-import Subscriptions from './subscriptions';
+import Subscription from './subscription';
 
 import Link from './link';
+
+import User from './user';
 
 import { Resolvers } from '../generated/codegen';
 
 const resolvers: Resolvers = {
   Query,
-  Subscriptions,
+  Subscription,
   Link,
+  User,
 };
 
 export default resolvers;

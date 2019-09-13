@@ -1,7 +1,7 @@
 
 import { SubscriptionResolvers } from '../generated/codegen';
 
-const Subscriptions: SubscriptionResolvers = {
+const Subscription: SubscriptionResolvers = {
   newLink: {
     subscribe: (parent, args, context) => context.prisma.$subscribe.link({ mutation_in: ['CREATED'] }).node(),
   },
@@ -10,4 +10,4 @@ const Subscriptions: SubscriptionResolvers = {
   },
 };
 
-export default Subscriptions;
+export default Subscription;
