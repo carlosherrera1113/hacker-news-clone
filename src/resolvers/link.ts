@@ -1,9 +1,9 @@
-
-import { LinkResolvers } from '../generated/graphql';
+import { LinkResolvers } from '../generated/codegen';
 
 const Link: LinkResolvers = {
-  postedBy: async (parent, context: any) => context.prisma.link({ id: parent.id }).postedBy(),
-  votes: async (parent, context: any) => context.prisma.link({ id: parent.id }).votes(),
+  postedBy: ({ id }, args, context) => context.prisma.link({ id }).postedBy(),
+
+  votes: ({ id }, args, context) => context.prisma.link({ id }).votes(),
 };
 
 export default Link;

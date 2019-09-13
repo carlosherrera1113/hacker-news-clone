@@ -1,9 +1,9 @@
 
-import { Query } from './query';
+import Query from './query';
 
-import { Link } from './link';
+import Link from './link';
 
-import { Resolvers } from '../generated/graphql';
+import { Resolvers } from '../generated/codegen';
 
 const resolvers: Resolvers = {
   Query,
