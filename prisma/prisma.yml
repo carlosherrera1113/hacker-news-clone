@@ -1,0 +1,7 @@
+endpoint: https://us1.prisma.sh/carlos-herrera/hacker-news-clone/dev
+
+datamodel: datamodel.prisma
+
+generate:
+  - generator: typescript-client
+    output: ../src/generated/prisma-client

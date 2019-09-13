@@ -1,8 +1,13 @@
 {
     "compilerOptions": {
-        "module": "CommonJs",
-        "noImplicitAny": false,
-        "allowJs": false
+        "module": "commonjs",
+        "noImplicitAny": true,
+        "allowJs": false,
+        "esModuleInterop": true,
+        "sourceMap": true,
+        "alwaysStrict": true,
+        "strictFunctionTypes": true,
+        "lib": ["es2016", "esnext.asynciterable"]
     },
     "include": ["src/**/*.ts",],
     "exclude": ["node_modules"]

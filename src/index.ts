@@ -1,17 +1,23 @@
-import { ApolloServer } from 'apollo-server';
+import { ApolloServer, makeExecutableSchema } from 'apollo-server';
 
-const typeDefs = `
-type Query {
-    info: String!
-}`;
+import * as fs from 'fs';
 
-const resolvers = {
-  Query: {
-    info: (): string => 'This is the API of a Hackernews Clone',
-  },
-};
+import { prisma } from './generated/prisma-client';
 
-const server = new ApolloServer({ typeDefs, resolvers });
+import resolvers from './resolvers/index';
+
+const schema = makeExecutableSchema({
+  typeDefs: fs.readFileSync('./src/schema.graphql', 'utf-8'),
+});
+
+const server = new ApolloServer({
+  schema,
+  resolvers,
+  context: (request): any => ({
+    ...request,
+    prisma,
+  }),
+});
 
 server.listen().then(({ url }) => {
   console.log(`Server ready at ${url}`);

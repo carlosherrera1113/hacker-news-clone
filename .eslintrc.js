@@ -10,6 +10,16 @@ module.exports = {
     },
     'rules': {
         'semi': 1,
-        'no-console': 0
+        'no-console': 0,
+        'no-redeclare': 0,
+        '@typescript-eslint/camelcase': 0,
+        '@typescript-eslint/no-explicit-any': 0
     },
+    'settings': {
+        'import/resolver': {
+            'node': {
+                'extensions': ['.js', '.ts']
+            }
+        }
+    }
 };

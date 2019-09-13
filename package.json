@@ -1,25 +1,33 @@
 {
   "name": "hacker-news-clone",
   "version": "1.0.0",
-  "description": "An API clone of the popular news site for computer science using TypeScript and GraphQL",
+  "description": "An API clone of the popular news site for computer science using TypeScript, GraphQL, and Node.js",
   "main": "src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon"
+    "start": "nodemon",
+    "generate": "graphql-codegen --config codegen.yml"
   },
   "author": "Carlos Herrera",
   "license": "ISC",
   "dependencies": {
+    "@graphql-codegen/add": "^1.7.0",
+    "@graphql-codegen/cli": "^1.7.0",
     "apollo-server": "^2.9.2",
     "graphql": "^14.5.4",
-    "graphql-import": "^0.7.1"
+    "graphql-import": "^0.7.1",
+    "prisma-client-lib": "^1.34.8"
   },
   "devDependencies": {
+    "@graphql-codegen/introspection": "1.7.0",
+    "@graphql-codegen/typescript": "1.7.0",
+    "@graphql-codegen/typescript-resolvers": "^1.7.0",
     "@typescript-eslint/eslint-plugin": "^2.1.0",
     "@typescript-eslint/parser": "^2.1.0",
     "eslint": "^6.1.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
+    "graphql-code-generator": "^0.18.2",
     "ts-node": "^8.3.0",
     "typescript": "^3.6.2"
   }
