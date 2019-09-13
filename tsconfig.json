@@ -6,7 +6,6 @@
         "esModuleInterop": true,
         "sourceMap": true,
         "alwaysStrict": true,
-        "strictFunctionTypes": true,
         "lib": ["es2016", "esnext.asynciterable"]
     },
     "include": ["src/**/*.ts",],
