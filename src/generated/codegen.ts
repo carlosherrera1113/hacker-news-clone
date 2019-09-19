@@ -128,7 +128,7 @@ export type MutationResolvers<ContextType = Context, ParentType extends Resolver
   post?: Resolver<ResolversTypes['Link'], ParentType, ContextType, RequireFields<MutationPostArgs, 'url' | 'description'>>,
   signUp?: Resolver<Maybe<ResolversTypes['AuthPayload']>, ParentType, ContextType, RequireFields<MutationSignUpArgs, 'email' | 'password' | 'name'>>,
   login?: Resolver<Maybe<ResolversTypes['AuthPayload']>, ParentType, ContextType, RequireFields<MutationLoginArgs, 'email' | 'password'>>,
-  vote?: Resolver<Maybe<ResolversTypes['Vote']>, ParentType, ContextType, RequireFields<MutationVoteArgs, 'linkId'>>,
+  vote?: Resolver<ResolversTypes['Vote'], ParentType, ContextType, RequireFields<MutationVoteArgs, 'linkId'>>,
 }>;
 
 export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
@@ -150,8 +150,8 @@ export type UserResolvers<ContextType = Context, ParentType extends ResolversPar
 
 export type VoteResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Vote'] = ResolversParentTypes['Vote']> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>,
-  link?: Resolver<ResolversTypes['Link'], ParentType, ContextType>,
-  user?: Resolver<ResolversTypes['User'], ParentType, ContextType>,
+  link?: Resolver<Maybe<ResolversTypes['Link']>, ParentType, ContextType>,
+  user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>,
 }>;
 
 export type Resolvers<ContextType = Context> = ResolversObject<{
@@ -215,7 +215,7 @@ export type Mutation = {
   post: Link,
   signUp?: Maybe<AuthPayload>,
   login?: Maybe<AuthPayload>,
-  vote?: Maybe<Vote>,
+  vote: Vote,
 };
 
 
@@ -273,6 +273,6 @@ export type User = {
 export type Vote = {
    __typename?: 'Vote',
   id: Scalars['ID'],
-  link: Link,
-  user: User,
+  link?: Maybe<Link>,
+  user?: Maybe<User>,
 };

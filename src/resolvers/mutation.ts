@@ -46,6 +46,25 @@ const Mutation: MutationResolvers = {
 
     return link;
   },
+  vote: async (parent, { linkId }, context) => {
+    const userId = getUserId(context);
+
+    const linkExists = await context.prisma.$exists.vote({
+      user: { id: userId },
+      link: { id: linkId },
+    });
+
+    if (linkExists) {
+      throw new Error(`Already voted for link: ${linkId}`);
+    }
+
+    const vote = await context.prisma.createVote({
+      user: { connect: { id: userId } },
+      link: { connect: { id: linkId } },
+    });
+
+    return vote;
+  },
 };
 
 export default Mutation;

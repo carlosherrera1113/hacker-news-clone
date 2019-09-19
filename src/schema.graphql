@@ -7,7 +7,7 @@ type Mutation {
   post(url: String!, description: String!): Link!
   signUp(email: String!, password: String!, name: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
-  vote(linkId: ID!): Vote
+  vote(linkId: ID!): Vote!
 }
 
 type Feed {
@@ -42,8 +42,8 @@ type Subscription {
 
 type Vote {
   id: ID!
-  link: Link!
-  user: User!
+  link: Link
+  user: User
 }
 
 enum LinkOrderByInput {
