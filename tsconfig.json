@@ -8,6 +8,6 @@
         "alwaysStrict": true,
         "lib": ["es2016", "esnext.asynciterable"]
     },
-    "include": ["src/**/*.ts",],
+    "include": ["src/**/*.ts"],
     "exclude": ["node_modules"]
 }
