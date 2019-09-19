@@ -5,5 +5,3 @@ datamodel: datamodel.prisma
 generate:
   - generator: typescript-client
     output: ../src/generated/prisma-client
-
-secret: ${env:MY_SECRET}
