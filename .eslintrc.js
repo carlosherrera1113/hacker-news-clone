@@ -14,7 +14,8 @@ module.exports = {
         'no-redeclare': 0,
         '@typescript-eslint/camelcase': 0,
         '@typescript-eslint/no-explicit-any': 0,
-        '@typescript-eslint/explicit-function-return-type': 0
+        '@typescript-eslint/explicit-function-return-type': 0,
+        'object-curly-newline': 0,
     },
     'settings': {
         'import/resolver': {

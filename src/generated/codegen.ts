@@ -121,7 +121,7 @@ export type LinkResolvers<ContextType = Context, ParentType extends ResolversPar
   description?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   url?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   postedBy?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>,
-  votes?: Resolver<Array<ResolversTypes['Vote']>, ParentType, ContextType>,
+  votes?: Resolver<Maybe<Array<ResolversTypes['Vote']>>, ParentType, ContextType>,
 }>;
 
 export type MutationResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
@@ -198,7 +198,7 @@ export type Link = {
   description: Scalars['String'],
   url: Scalars['String'],
   postedBy?: Maybe<User>,
-  votes: Array<Vote>,
+  votes?: Maybe<Array<Vote>>,
 };
 
 export enum LinkOrderByInput {

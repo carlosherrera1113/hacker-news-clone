@@ -32,7 +32,7 @@ type Link {
   description: String!
   url: String!
   postedBy: User
-  votes: [Vote!]!
+  votes: [Vote!]
 }
 
 type Subscription {

@@ -2,22 +2,22 @@
 import { QueryResolvers } from '../generated/codegen';
 
 const Query: QueryResolvers = {
-  feed: async (parent, args, context) => {
-    const where = args.filter ? {
+  feed: async (parent, { skip, first, orderBy, filter }, context) => {
+    const where = filter ? {
       OR: [
-        { description_contains: args.filter },
-        { url_contains: args.filter },
+        { description_contains: filter },
+        { url_contains: filter },
       ],
     } : {};
 
-    const links: any[] = await context.prisma.links({
+    const links = await context.prisma.links({
       where,
-      skip: args.skip,
-      first: args.first,
-      orderBy: args.orderBy,
+      skip,
+      first,
+      orderBy,
     });
 
-    const count: number = await context.prisma
+    const count = await context.prisma
       .linksConnection({ where })
       .aggregate()
       .count();
