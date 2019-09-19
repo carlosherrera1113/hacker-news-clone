@@ -1,18 +1,15 @@
-import { ApolloServer, makeExecutableSchema } from 'apollo-server';
+import { ApolloServer } from 'apollo-server';
 
-import * as fs from 'fs';
+import { importSchema } from 'graphql-import';
 
 import { prisma } from './generated/prisma-client';
 
 import resolvers from './resolvers/index';
 
-
-const schema = makeExecutableSchema({
-  typeDefs: fs.readFileSync('./src/schema.graphql', 'utf-8'),
-});
+const typeDefs = importSchema('src/schema.graphql');
 
 const server = new ApolloServer({
-  schema,
+  typeDefs,
   resolvers,
   context: (request): any => ({
     ...request,
