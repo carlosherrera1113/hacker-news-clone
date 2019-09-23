@@ -6,7 +6,9 @@
         "esModuleInterop": true,
         "sourceMap": true,
         "alwaysStrict": true,
-        "lib": ["es2016", "esnext.asynciterable"]
+        "skipLibCheck": true,
+        "lib": ["esnext", "dom"],
+        "outDir": "dist"
     },
     "include": ["src/**/*.ts"],
     "exclude": ["node_modules"]
