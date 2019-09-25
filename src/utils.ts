@@ -3,8 +3,6 @@ import * as jwt from 'jsonwebtoken';
 
 import { Context } from './context';
 
-import { User } from './generated/codegen';
-
 const getUserId = (context: Context) => {
   const Authorization = context.request.get('Authorization');
 
@@ -12,10 +10,10 @@ const getUserId = (context: Context) => {
     const token = Authorization.replace('Bearer', '');
 
     const { userId } = jwt.verify(token, process.env.APP_SECRET) as {
-            userId: User;
+            userId: string;
         };
 
-    return userId.id;
+    return userId;
   }
 
   throw new Error('Not Authenticated');

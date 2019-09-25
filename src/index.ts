@@ -11,12 +11,12 @@ const typeDefs = importSchema('src/schema.graphql');
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: (request): any => ({
+  context: (request) => ({
     ...request,
     prisma,
   }),
 });
 
 server.listen().then(({ url }) => {
-  console.log(`Server ready at ${url}`);
+  console.log(`🚀 Server ready at ${url}`);
 });

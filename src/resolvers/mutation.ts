@@ -5,10 +5,10 @@ import * as jwt from 'jsonwebtoken';
 
 import getUserId from '../utils';
 
-import { MutationResolvers } from '../generated/codegen';
+import { MutationResolvers, AuthPayload } from '../generated/codegen';
 
 const Mutation: MutationResolvers = {
-  signUp: async (parent, args, context) => {
+  signUp: async (parent, args, context): Promise<AuthPayload> => {
     const password = await bcrypt.hash(args.password, 10);
 
     const user = await context.prisma.createUser({ ...args, password });
@@ -17,10 +17,10 @@ const Mutation: MutationResolvers = {
 
     return {
       token,
-      id: user.id,
+      user,
     };
   },
-  login: async (parent, { email, password }, context) => {
+  login: async (parent, { email, password }, context): Promise<AuthPayload> => {
     const user = await context.prisma.user({ email });
 
     const valid = await bcrypt.compare(password, user ? user.password : '');
@@ -32,7 +32,7 @@ const Mutation: MutationResolvers = {
 
     return {
       token,
-      id: user.id,
+      user,
     };
   },
   post: async (parent, { description, url }, context) => {
