@@ -132,7 +132,6 @@ export type MutationResolvers<ContextType = Context, ParentType extends Resolver
 }>;
 
 export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
-  info?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
   feed?: Resolver<ResolversTypes['Feed'], ParentType, ContextType, QueryFeedArgs>,
 }>;
 
@@ -244,7 +243,6 @@ export type MutationVoteArgs = {
 
 export type Query = {
    __typename?: 'Query',
-  info: Scalars['String'],
   feed: Feed,
 };
 

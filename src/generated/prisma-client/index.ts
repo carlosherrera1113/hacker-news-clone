@@ -1347,7 +1347,6 @@ export const models: Model[] = [
 export const Prisma = makePrismaClientClass<ClientConstructor<Prisma>>({
   typeDefs,
   models,
-  endpoint: `https://us1.prisma.sh/carlos-herrera/hacker-news-clone/dev`,
-  secret: `${process.env["MY_SECRET"]}`
+  endpoint: `https://us1.prisma.sh/carlos-herrera/hacker-news-clone/dev`
 });
 export const prisma = new Prisma();
