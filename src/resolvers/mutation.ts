@@ -1,9 +1,7 @@
 
 import * as bcrypt from 'bcryptjs';
 
-import * as jwt from 'jsonwebtoken';
-
-import getUserId from '../utils';
+import { getUserId, sendRefreshToken, createToken, createRefreshToken } from '../utils';
 
 import { MutationResolvers, AuthPayload } from '../generated/codegen';
 
@@ -13,7 +11,9 @@ const Mutation: MutationResolvers = {
 
     const user = await context.prisma.createUser({ ...args, password });
 
-    const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
+    const token = createToken(user);
+
+    sendRefreshToken(context.res, createRefreshToken(user));
 
     return {
       token,
@@ -28,7 +28,9 @@ const Mutation: MutationResolvers = {
     if (!user || !valid) {
       throw new Error('Invalid Credentials!');
     }
-    const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
+    const token = createToken(user);
+
+    sendRefreshToken(context.res, createRefreshToken(user));
 
     return {
       token,
