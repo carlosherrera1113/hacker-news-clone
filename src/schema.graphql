@@ -28,6 +28,7 @@ type User {
 
 type Link {
   id: ID!
+  createdAt: DateTime!
   description: String!
   url: String!
   postedBy: User
@@ -53,3 +54,5 @@ enum LinkOrderByInput {
   createdAt_ASC
   createdAt_DESC
 }
+
+scalar DateTime

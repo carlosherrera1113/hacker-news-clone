@@ -13,7 +13,7 @@ export const getUserId = (context: Context) => {
   if (Authorization) {
     const token = Authorization.replace('Bearer ', '');
 
-    const userId = jwt.verify(token, process.env.APP_SECRET) as any;
+    const { userId } = jwt.verify(token, process.env.APP_SECRET) as any;
 
     return userId;
   }

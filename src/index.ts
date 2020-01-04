@@ -60,6 +60,6 @@ const server = new ApolloServer({
   },
 });
 
-server.applyMiddleware({ app });
+server.applyMiddleware({ app, cors: false });
 
-app.listen(4000, () => console.log('🚀 Server ready'));
+app.listen({ port: 4000 }, () => console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`));
