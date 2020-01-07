@@ -24,7 +24,7 @@ export const getUserId = (context: Context) => {
 export const sendRefreshToken = (res: Response, token: string) => {
   res.cookie('getToken', token, {
     httpOnly: true,
-    path: './refresh_token',
+    path: '/refresh_token',
   });
 };
 
