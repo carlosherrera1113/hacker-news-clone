@@ -33,7 +33,7 @@ app.post('/refresh_token', async (req, res) => {
   if (!token) {
     return res.send({ ok: false, accessToken: '' });
   }
-  const { userId } = jwt.verify(token, process.env.APP_SECRET) as any;
+  const { userId } = jwt.verify(token, process.env.REFRESH_TOKEN_SECRET) as any;
   const user = await prisma.user({ id: userId });
 
   if (!user) {

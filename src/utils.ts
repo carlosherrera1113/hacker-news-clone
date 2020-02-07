@@ -13,7 +13,7 @@ export const getUserId = (context: Context) => {
   if (Authorization) {
     const token = Authorization.replace('Bearer ', '');
 
-    const { userId } = jwt.verify(token, process.env.APP_SECRET) as any;
+    const { userId } = jwt.verify(token, process.env.TOKEN_SECRET) as any;
 
     return userId;
   }
@@ -29,11 +29,17 @@ export const sendRefreshToken = (res: Response, token: string) => {
 };
 
 export const createToken = (user: User) => {
-  return jwt.sign({ userId: user.id }, process.env.APP_SECRET, { expiresIn: '15m' });
+  return jwt.sign(
+    { userId: user.id },
+    process.env.TOKEN_SECRET,
+    { expiresIn: '15m' },
+  );
 };
 
 export const createRefreshToken = (user: User) => {
   return jwt.sign(
-    { userId: user.id }, process.env.APP_SECRET, { expiresIn: '7d' },
+    { userId: user.id },
+    process.env.REFRESH_TOKEN_SECRET,
+    { expiresIn: '7d' },
   );
 };
