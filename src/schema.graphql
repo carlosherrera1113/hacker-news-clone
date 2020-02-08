@@ -1,5 +1,6 @@
 type Query {
   feed(filter: String, skip: Int, first: Int, orderBy: LinkOrderByInput): Feed!
+  me: User!
 }
 
 type Mutation {

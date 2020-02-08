@@ -1,5 +1,6 @@
 
 import { QueryResolvers } from '../generated/codegen';
+import { getUserId } from '../utils';
 
 const Query: QueryResolvers = {
   feed: async (parent, { skip, first, orderBy, filter }, context) => {
@@ -26,6 +27,12 @@ const Query: QueryResolvers = {
       links,
       count,
     };
+  },
+  me: async (parent, args, context) => {
+    const userId = getUserId(context);
+    const user = await context.prisma.user({ id: userId });
+
+    return user;
   },
 };
 
