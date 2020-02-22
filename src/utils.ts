@@ -8,10 +8,10 @@ import { Context } from './context';
 import { User } from './generated/codegen';
 
 export const getUserId = (context: Context) => {
-  const Authorization = context.req.get('Authorization');
+  const authorization = context.req.get('authorization');
 
-  if (Authorization) {
-    const token = Authorization.replace('Bearer ', '');
+  if (authorization) {
+    const token = authorization.replace('Bearer ', '');
 
     const { userId } = jwt.verify(token, process.env.TOKEN_SECRET) as any;
 
