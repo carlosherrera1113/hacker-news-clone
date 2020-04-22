@@ -3,7 +3,7 @@ import * as bcrypt from 'bcryptjs';
 
 import { getUserId, sendRefreshToken, createToken, createRefreshToken } from '../utils';
 
-import { MutationResolvers, AuthPayload } from '../generated/codegen';
+import { MutationResolvers, AuthPayload, SuccessMessage } from '../generated/codegen';
 
 const Mutation: MutationResolvers = {
   signUp: async (parent, args, context): Promise<AuthPayload> => {
@@ -35,6 +35,13 @@ const Mutation: MutationResolvers = {
     return {
       token,
       user,
+    };
+  },
+  logout: async (parent, args, context): Promise<SuccessMessage> => {
+    sendRefreshToken(context.res, '');
+
+    return {
+      message: 'Logged Out!',
     };
   },
   post: async (parent, { description, url }, context) => {

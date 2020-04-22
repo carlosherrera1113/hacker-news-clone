@@ -86,6 +86,7 @@ export type ResolversTypes = ResolversObject<{
   Vote: ResolverTypeWrapper<Vote>,
   Mutation: ResolverTypeWrapper<{}>,
   AuthPayload: ResolverTypeWrapper<AuthPayload>,
+  SuccessMessage: ResolverTypeWrapper<SuccessMessage>,
   Subscription: ResolverTypeWrapper<{}>,
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>,
 }>;
@@ -104,6 +105,7 @@ export type ResolversParentTypes = ResolversObject<{
   Vote: Vote,
   Mutation: {},
   AuthPayload: AuthPayload,
+  SuccessMessage: SuccessMessage,
   Subscription: {},
   Boolean: Scalars['Boolean'],
 }>;
@@ -135,17 +137,22 @@ export type MutationResolvers<ContextType = Context, ParentType extends Resolver
   post?: Resolver<ResolversTypes['Link'], ParentType, ContextType, RequireFields<MutationPostArgs, 'url' | 'description'>>,
   signUp?: Resolver<ResolversTypes['AuthPayload'], ParentType, ContextType, RequireFields<MutationSignUpArgs, 'email' | 'password' | 'name'>>,
   login?: Resolver<ResolversTypes['AuthPayload'], ParentType, ContextType, RequireFields<MutationLoginArgs, 'email' | 'password'>>,
+  logout?: Resolver<Maybe<ResolversTypes['SuccessMessage']>, ParentType, ContextType>,
   vote?: Resolver<ResolversTypes['Vote'], ParentType, ContextType, RequireFields<MutationVoteArgs, 'linkId'>>,
 }>;
 
 export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   feed?: Resolver<ResolversTypes['Feed'], ParentType, ContextType, QueryFeedArgs>,
-  me?: Resolver<ResolversTypes['User'], ParentType, ContextType>,
+  me?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>,
 }>;
 
 export type SubscriptionResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Subscription'] = ResolversParentTypes['Subscription']> = ResolversObject<{
   newLink?: SubscriptionResolver<ResolversTypes['Link'], "newLink", ParentType, ContextType>,
   newVote?: SubscriptionResolver<ResolversTypes['Vote'], "newVote", ParentType, ContextType>,
+}>;
+
+export type SuccessMessageResolvers<ContextType = Context, ParentType extends ResolversParentTypes['SuccessMessage'] = ResolversParentTypes['SuccessMessage']> = ResolversObject<{
+  message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>,
 }>;
 
 export type UserResolvers<ContextType = Context, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = ResolversObject<{
@@ -169,6 +176,7 @@ export type Resolvers<ContextType = Context> = ResolversObject<{
   Mutation?: MutationResolvers<ContextType>,
   Query?: QueryResolvers<ContextType>,
   Subscription?: SubscriptionResolvers<ContextType>,
+  SuccessMessage?: SuccessMessageResolvers<ContextType>,
   User?: UserResolvers<ContextType>,
   Vote?: VoteResolvers<ContextType>,
 }>;
@@ -190,20 +198,20 @@ export type Scalars = {
 };
 
 export type AuthPayload = {
-  __typename?: 'AuthPayload',
+   __typename?: 'AuthPayload',
   token: Scalars['String'],
   user: User,
 };
 
 
 export type Feed = {
-  __typename?: 'Feed',
+   __typename?: 'Feed',
   links: Array<Link>,
   count: Scalars['Int'],
 };
 
 export type Link = {
-  __typename?: 'Link',
+   __typename?: 'Link',
   id: Scalars['ID'],
   createdAt: Scalars['DateTime'],
   description: Scalars['String'],
@@ -222,10 +230,11 @@ export enum LinkOrderByInput {
 }
 
 export type Mutation = {
-  __typename?: 'Mutation',
+   __typename?: 'Mutation',
   post: Link,
   signUp: AuthPayload,
   login: AuthPayload,
+  logout?: Maybe<SuccessMessage>,
   vote: Vote,
 };
 
@@ -254,9 +263,9 @@ export type MutationVoteArgs = {
 };
 
 export type Query = {
-  __typename?: 'Query',
+   __typename?: 'Query',
   feed: Feed,
-  me: User,
+  me?: Maybe<User>,
 };
 
 
@@ -268,13 +277,18 @@ export type QueryFeedArgs = {
 };
 
 export type Subscription = {
-  __typename?: 'Subscription',
+   __typename?: 'Subscription',
   newLink: Link,
   newVote: Vote,
 };
 
+export type SuccessMessage = {
+   __typename?: 'SuccessMessage',
+  message?: Maybe<Scalars['String']>,
+};
+
 export type User = {
-  __typename?: 'User',
+   __typename?: 'User',
   id: Scalars['ID'],
   name: Scalars['String'],
   email: Scalars['String'],
@@ -282,7 +296,7 @@ export type User = {
 };
 
 export type Vote = {
-  __typename?: 'Vote',
+   __typename?: 'Vote',
   id: Scalars['ID'],
   link?: Maybe<Link>,
   user?: Maybe<User>,

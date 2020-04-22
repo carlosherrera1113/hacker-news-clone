@@ -1,13 +1,18 @@
 type Query {
   feed(filter: String, skip: Int, first: Int, orderBy: LinkOrderByInput): Feed!
-  me: User!
+  me: User
 }
 
 type Mutation {
   post(url: String!, description: String!): Link!
   signUp(email: String!, password: String!, name: String!): AuthPayload!
   login(email: String!, password: String!): AuthPayload!
+  logout: SuccessMessage
   vote(linkId: ID!): Vote!
+}
+
+type SuccessMessage {
+  message: String
 }
 
 type Feed {
