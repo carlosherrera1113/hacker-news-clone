@@ -29,10 +29,14 @@ const Query: QueryResolvers = {
     };
   },
   me: async (parent, args, context) => {
-    const userId = getUserId(context);
-    const user = await context.prisma.user({ id: userId });
+    try {
+      const userId = getUserId(context);
+      const user = await context.prisma.user({ id: userId });
 
-    return user;
+      return user;
+    } catch (error) {
+      return null;
+    }
   },
 };
 
