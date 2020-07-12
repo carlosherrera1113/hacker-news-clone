@@ -22,7 +22,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: 'https://hacker-news-clone-server.herokuapp.com/graphql',
+    origin: '*',
     credentials: true,
   }),
 );
