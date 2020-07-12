@@ -10,8 +10,6 @@ import * as jwt from 'jsonwebtoken';
 
 import http from 'http';
 
-import path from 'path';
-
 import { importSchema } from 'graphql-import';
 
 import { prisma } from './generated/prisma-client';
@@ -21,10 +19,6 @@ import resolvers from './resolvers/index';
 import { createToken, sendRefreshToken, createRefreshToken } from './utils';
 
 const app = express();
-
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
-}
 
 app.use(
   cors({
@@ -51,10 +45,6 @@ app.post('/refresh_token', async (req, res) => {
   sendRefreshToken(res, createRefreshToken(user));
 
   return res.send({ ok: true, accessToken: createToken(user) });
-});
-
-app.get('*', async (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
 const typeDefs = importSchema('src/schema.graphql');
