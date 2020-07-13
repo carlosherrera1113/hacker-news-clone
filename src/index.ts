@@ -59,6 +59,7 @@ const server = new ApolloServer({
       prisma,
     };
   },
+  introspection: true,
 });
 
 const httpServer = http.createServer(app);
