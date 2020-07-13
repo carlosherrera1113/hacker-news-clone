@@ -8,8 +8,6 @@ import cors from 'cors';
 
 import * as jwt from 'jsonwebtoken';
 
-import http from 'http';
-
 import { importSchema } from 'graphql-import';
 
 import { prisma } from './generated/prisma-client';
@@ -62,11 +60,7 @@ const server = new ApolloServer({
   introspection: true,
 });
 
-const httpServer = http.createServer(app);
-
 server.applyMiddleware({ app, cors: false });
-
-server.installSubscriptionHandlers(httpServer);
 
 const PORT = process.env.PORT || 4000;
 
