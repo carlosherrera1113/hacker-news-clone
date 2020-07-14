@@ -22,7 +22,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: 'https://5f0d278064f7955ba263bc22--vibrant-tereshkova-1b7d3e.netlify.app',
+    origin: 'https://modernhackernews.netlify.app',
     credentials: true,
   }),
 );
@@ -70,6 +70,5 @@ server.installSubscriptionHandlers(httpServer);
 const PORT = process.env.PORT || 4000;
 
 httpServer.listen({ port: PORT }, () => {
-  console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`);
-  console.log(`🚀 Subscriptions ready at ws://localhost:${PORT}${server.subscriptionsPath}`);
+  console.log(`🚀 Server ready at ${PORT}${server.graphqlPath}`);
 });
