@@ -22,7 +22,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: 'http://localhost:3000',
+    origin: 'https://5f0d278064f7955ba263bc22--vibrant-tereshkova-1b7d3e.netlify.app',
     credentials: true,
   }),
 );
