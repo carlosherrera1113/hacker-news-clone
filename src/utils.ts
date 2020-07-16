@@ -1,4 +1,3 @@
-
 import * as jwt from 'jsonwebtoken';
 
 import { Response } from 'express';
